@@ -14,11 +14,11 @@
 
       <appSettings file="bin\Web.user.config">
         <add key="ConfigurationId" value="Acropolis.Local" />
-        <add key="Name" value="{c:Property('Name')}" />
-        <add key="Email" value="{c:Property('Email')}" />
+        <add key="Name" value="{c:Value('Name')}" />
+        <add key="Email" value="{c:Value('Email')}" />
 
-        <xsl:if test="c:Property('Company') = 'IBM'">
-          <add key="Company" value="{c:Property('Company')}" />
+        <xsl:if test="c:Value('Company') = 'IBM'">
+          <add key="Company" value="{c:Value('Company')}" />
         </xsl:if>
 
       </appSettings>

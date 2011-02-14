@@ -22,7 +22,7 @@ namespace Core.Config
         /// <summary>
         /// Returns value of application settings property or empty string if not found
         /// </summary>
-        public String Property(String key)
+        public String Value(String key)
         {
             var element = _settings[key];
 

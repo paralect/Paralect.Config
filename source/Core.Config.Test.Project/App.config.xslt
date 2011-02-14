@@ -7,7 +7,7 @@
     <configuration>
       <appSettings>
         <add key="Test" value="Value2" />
-        <add key="SolutionFolder" value="{c:Property('Acropolis.SolutionFolder')}" />
+        <add key="SolutionFolder" value="{c:Value('Acropolis.SolutionFolder')}" />
       </appSettings>     
       
     </configuration>
