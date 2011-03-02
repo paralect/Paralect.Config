@@ -8,6 +8,9 @@
     <MSBuild Projects="Core.Config.sln" Targets="Rebuild" Properties="Configuration=Publish;" />
   </Target>  
   
-  
+  <Target Name="Info">
+    <Message Text="MSBuildToolsPath: $(MSBuildToolsPath)" />
+    <Message Text="MSBuildExtensionsPath: $(MSBuildExtensionsPath)" />
+  </Target>  
 
 </Project>

@@ -161,7 +161,9 @@
     </ItemGroup>
     <Message Text="Merging assemblies..." />
     <MakeDir Directories="$(OutputPath)\Published" />
-    <ILMerge InputAssemblies="@(InputAssemblies)" OutputFile="$(OutputPath)\Published\Core.Config.exe" DebugInfo="false" />
+    <ILMerge InputAssemblies="@(InputAssemblies)" 
+             OutputFile="$(OutputPath)\Published\Core.Config.exe" DebugInfo="false"
+             ToolPath="c:\Program Files (x86)\Microsoft\ILMerge" />
   </Target>
 
 </Project>
