@@ -1,11 +1,11 @@
 <Project DefaultTargets="Debug" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Target Name="Debug">
-    <MSBuild Projects="Core.Config.sln" Targets="Rebuild" />
+    <MSBuild Projects="Paralect.Config.sln" Targets="Rebuild" />
   </Target>
   
   <Target Name="Publish">
-    <MSBuild Projects="Core.Config.sln" Targets="Rebuild" Properties="Configuration=Publish;" />
+    <MSBuild Projects="Paralect.Config.sln" Targets="Rebuild" Properties="Configuration=Publish;" />
   </Target>  
   
   <Target Name="Info">
