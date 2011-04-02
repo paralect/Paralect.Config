@@ -56,7 +56,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\SettingsFolderNotFound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsPropertyAttribute.cs" />
     <Compile Include="SettingsBrowser.cs" />
+    <Compile Include="SettingsMapper.cs" />
     <Compile Include="SettingsReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
