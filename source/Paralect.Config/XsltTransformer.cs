@@ -35,7 +35,11 @@ namespace Paralect.Config
                 var xsltSettings = new XsltSettings();
 
                 XsltArgumentList argumentList = new XsltArgumentList();
-                argumentList.AddExtensionObject("http://core.com/config", new XsltExtensionMethods(_settings));
+
+                var extensions = new XsltExtensionMethods(_settings);
+
+                argumentList.AddExtensionObject("http://core.com/config", extensions);
+                argumentList.AddExtensionObject("http://paralect.com/config", extensions);
 
                 var transformer = new XslCompiledTransform(true);
                 transformer.Load(xsltTemplateReader, xsltSettings, null);

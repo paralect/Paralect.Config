@@ -84,7 +84,7 @@ namespace Paralect.Config.Settings
                 current = current.Parent;
             }
 
-            throw new SettingsFolderNotFound(String.Format("Settings folder not found. Make sure that you have .core.settings file in the current folder (or in any ancestor folder)."));
+            throw new SettingsFolderNotFound(String.Format("Settings folder was not found. Make sure that you have .paralect.config file in the current folder (or in any ancestor folder)."));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Paralect.Config.Settings
             var settingsFolderPath = File.ReadAllText(filePath).Trim();
 
             if (!Directory.Exists(settingsFolderPath))
-                throw new SettingsFolderNotFound(String.Format("Settings folder not found. File {0} points to settings folder that doesn't exist: {1}.", filePath, settingsFolderPath));
+                throw new SettingsFolderNotFound(String.Format("Settings folder was not found. File {0} points to settings folder that doesn't exist: {1}.", filePath, settingsFolderPath));
 
             return settingsFolderPath;
         }

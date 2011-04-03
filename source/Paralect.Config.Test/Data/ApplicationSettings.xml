@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<configuration xmlns:c="http://core.com/config">
+<configuration xmlns:c="http://paralect.com/config">
   <appSettings>
     <add key="Name" value="Value" />
     <add key="Email" value="some@email.com" />

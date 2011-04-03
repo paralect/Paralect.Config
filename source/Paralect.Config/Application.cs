@@ -52,7 +52,7 @@ namespace Paralect.Config
             Application app = null;
             try
             {
-                Console.Write("Core.Config 1.0");
+                Console.Write("Paralect.Config 1.2");
                 app = new Application(args);
                 app.Launch();
             }
