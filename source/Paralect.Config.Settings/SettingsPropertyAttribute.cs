@@ -4,37 +4,35 @@ using System.Text;
 
 namespace Paralect.Config.Settings
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class SettingsPropertyAttribute : Attribute
     {
-        public string Name { get; set; }
-        public Type Type { get; set; }
+        /// <summary>
+        /// Property key
+        /// </summary>
+        public string Key { get; set; }
 
         /// <summary>
-        /// By default type is String
+        /// Map property to the key of application settings
         /// </summary>
-        public SettingsPropertyAttribute(String name, Type type)
+        public SettingsPropertyAttribute(String key)
         {
-            Name = name;
-            Type = type;
+            Key = key;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Attribute"/> class.
-        /// </summary>
-        public SettingsPropertyAttribute(string name) : this(name, typeof(String))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Attribute"/> class.
+        /// Map property of not primitive type
         /// </summary>
         public SettingsPropertyAttribute()
         {
         }
 
-        public Boolean IsEmpty
+        /// <summary>
+        /// Returns true if key was specified
+        /// </summary>
+        public Boolean IsKeySpecified
         {
-            get { return Name == null; }
+            get { return Key != null; }
         }
     }
 }

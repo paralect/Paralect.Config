@@ -5,49 +5,109 @@ using System.Text;
 
 namespace Paralect.Config.Settings
 {
-    public class SettingsMapper
+    /// <summary>
+    /// Maps application settings to your custom type or to existing instance of object
+    /// SettingsMapper read <appSettings /> right from your *.config file
+    /// </summary>
+    public static class SettingsMapper
     {
+        /// <summary>
+        /// Map application settings to instance of specified type
+        /// </summary>
         public static TObject Map<TObject>()
             where TObject : class, new()
         {
-            return (TObject) Map(typeof(TObject));
+            var instance = Activator.CreateInstance(typeof(TObject));
+            Map(typeof(TObject), instance);
+            return (TObject) instance;
         }
 
+        /// <summary>
+        /// Map application settings to existing object instance
+        /// </summary>
+        public static void Map<TObject>(TObject instance)
+            where TObject : class, new()
+        {
+            Map(typeof(TObject), instance);
+        }
+
+        /// <summary>
+        /// Map application settings to instance of specified type
+        /// </summary>
         public static Object Map(Type type)
         {
-            var obj = Activator.CreateInstance(type);
+            var instance = Activator.CreateInstance(type);
+            Map(type, instance);
+            return instance;
+        }
 
-            PropertyInfo[] infos = type.GetProperties();
+        /// <summary>
+        /// Map application settings to existing object instance
+        /// </summary>
+        public static void Map(Object instance)
+        {
+            Map(instance.GetType(), instance);
+        }
 
-            foreach (var info in infos)
+        /// <summary>
+        /// Map application settings to your custom type or to existing instance of object
+        /// null i
+        /// </summary>
+        private static void Map(Type type, Object instance)
+        {
+            // Create object instance if not specified
+            if (instance == null)
+                throw new ArgumentNullException("instance");
+
+            // Get all the public properties of the type
+            PropertyInfo[] propertyInfos = type.GetProperties();
+
+            foreach (var propertyInfo in propertyInfos)
             {
-                object[] attributes = info.GetCustomAttributes(typeof(SettingsPropertyAttribute), true);
+                Object[] attributes = propertyInfo.GetCustomAttributes(typeof(SettingsPropertyAttribute), true);
 
                 if (attributes.Length < 1)
                     continue;
 
                 var propertyAttribute = attributes[0] as SettingsPropertyAttribute;
 
-                if (!propertyAttribute.IsEmpty)
-                {
-                    var configValue = System.Configuration.ConfigurationManager.AppSettings[propertyAttribute.Name];
-
-                    SetValue(info, obj, configValue);
-                }
-                else
-                {
-                    var innerObj = SettingsMapper.Map(info.PropertyType);
-                    info.SetValue(obj, innerObj, null);
-                }
+                ApplySettingsProperty(instance, propertyInfo, propertyAttribute);
             }
-            
-            return obj;            
         }
 
-        public static void SetValue(PropertyInfo propertyInfo, Object instance, String value)
+        private static void ApplySettingsProperty(Object instance, PropertyInfo propertyInfo, SettingsPropertyAttribute attribute)
         {
-            var convertedValue = Convert.ChangeType(value, propertyInfo.PropertyType);
+            // If key was not specified we assuming that this is inner object
+            if (!attribute.IsKeySpecified)
+            {
+                var innerObj = SettingsMapper.Map(propertyInfo.PropertyType);
+                propertyInfo.SetValue(instance, innerObj, null);
+                return;
+            }
+
+            // Reading settings from <appSettings />
+            var value = System.Configuration.ConfigurationManager.AppSettings[attribute.Key];
+
+            Object convertedValue = null;
+
+            // If this is Boolean 
+            if (propertyInfo.PropertyType == typeof(Boolean))
+            {
+                if (String.Compare(value, "true", true) == 0 || String.Compare(value, "yes", true) == 0)
+                    convertedValue = true;
+                else if (String.Compare(value, "false", true) == 0 || String.Compare(value, "no", true) == 0)
+                    convertedValue = false;
+                else
+                    throw new Exception(String.Format("Cannot convert from '{0}' to Boolean. Value can be 'true' or 'false'.", value));
+            }
+            // Otherwise we are using System.Convert 
+            else
+            {
+                convertedValue = Convert.ChangeType(value, propertyInfo.PropertyType);
+            }
+
             propertyInfo.SetValue(instance, convertedValue, null);
+
         }
     }
 }
