@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Paralect.Config.Host;
 
 namespace Paralect.Config.Test.Tests
 {

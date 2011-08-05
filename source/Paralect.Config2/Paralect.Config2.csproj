@@ -5,14 +5,29 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{453CABF8-F0EE-4FDF-8DCC-C5AA80892E63}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{45725D17-9219-4286-BBD6-D212EACFA78A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Paralect.Config</RootNamespace>
     <AssemblyName>Paralect.Config</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,19 +47,27 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Publish\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\Paralect.Config.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Debug\Paralect.Config.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;D:\Software\Microsoft Visual Studio 2010\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;D:\Software\Microsoft Visual Studio 2010\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,15 +76,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Application.cs" />
     <Compile Include="Transformer.cs" />
     <Compile Include="Utils\FileSearcher.cs" />
     <Compile Include="Utils\SettingsHelper.cs" />
-    <Compile Include="XsltExtensionMethods.cs" />
     <Compile Include="XsltTransformer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XsltExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Paralect.Config.Settings\Paralect.Config.Settings.csproj">
@@ -87,18 +132,18 @@
   <Target Name="PublishOutput" AfterTargets="Build">
     <CreateConfigFile ConfigPath="$(MSBuildProjectDirectory)\..\Paralect.Config.Test.Project\.paralect.config" SettingsPath="$(MSBuildProjectDirectory)\..\Paralect.Config.Test.Project\Settings\Profiles\DmitrySchetnikovich" />
     <ItemGroup>
-      <InputAssemblies Include="$(OutputPath)\Paralect.Config.dll" />
+      <InputAssemblies Include="$(OutputPath)\Paralect.Config.exe" />
       <InputAssemblies Include="$(OutputPath)\Paralect.Config.Settings.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(InputAssemblies)" DestinationFolder="$(MSBuildProjectDirectory)\..\Paralect.Config.Test.Project" />
   </Target>
   <Target Name="AfterBuild" Condition="$(Configuration) == 'Publish'">
     <ItemGroup>
-      <InputAssemblies Include="$(OutputPath)\Paralect.Config.dll" />
+      <InputAssemblies Include="$(OutputPath)\Paralect.Config.exe" />
       <InputAssemblies Include="$(OutputPath)\Paralect.Config.Settings.dll" />
     </ItemGroup>
     <Message Text="Merging assemblies..." />
     <MakeDir Directories="$(OutputPath)\Published" />
-    <ILMerge InputAssemblies="@(InputAssemblies)" OutputFile="$(OutputPath)\Published\Paralect.Config.dll" DebugInfo="false" />
+    <ILMerge InputAssemblies="@(InputAssemblies)" OutputFile="$(OutputPath)\Published\Paralect.Config.exe" DebugInfo="false" />
   </Target>
 </Project>

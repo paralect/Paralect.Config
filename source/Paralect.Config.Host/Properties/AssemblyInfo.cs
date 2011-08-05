@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Paralect.Config")]
+[assembly: AssemblyTitle("Paralect.Config.Host")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Paralect")]
-[assembly: AssemblyProduct("Paralect.Config")]
+[assembly: AssemblyProduct("Paralect.Config.Host")]
 [assembly: AssemblyCopyright("Copyright © Paralect 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dc0aa212-1790-49bf-9509-7cab194168c4")]
+[assembly: Guid("f8a368a5-7499-4987-b3c9-c8d0fcd3d1cc")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -66,12 +66,16 @@
     <Compile Include="Tests\TransformTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Paralect.Config.Host\Paralect.Config.Host.csproj">
+      <Project>{7DBEB078-828E-45F3-99ED-B0120D05A85F}</Project>
+      <Name>Paralect.Config.Host</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Paralect.Config.Settings\Paralect.Config.Settings.csproj">
       <Project>{8548D23B-0168-4020-9A86-A7499DC1ED80}</Project>
       <Name>Paralect.Config.Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Paralect.Config\Paralect.Config.csproj">
-      <Project>{45725D17-9219-4286-BBD6-D212EACFA78A}</Project>
+      <Project>{453CABF8-F0EE-4FDF-8DCC-C5AA80892E63}</Project>
       <Name>Paralect.Config</Name>
     </ProjectReference>
   </ItemGroup>
