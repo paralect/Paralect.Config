@@ -47,8 +47,16 @@ namespace Paralect.Config.Settings
         /// </param>
         public KeyValueConfigurationCollection GetSettings(String contextFolder, String settingsFolder = "")
         {
+            if (!String.IsNullOrEmpty(settingsFolder) && !Path.IsPathRooted(settingsFolder))
+                throw new ArgumentException("Path to settings folder can't be relative");
+
+
+            string pathToConfigFile = "";
             if (String.IsNullOrEmpty(settingsFolder))
-                settingsFolder = GetSettingsFolderPath(contextFolder);
+            {
+                pathToConfigFile = FindPathToConfigFile(contextFolder);
+                settingsFolder = ReadSettingsFolderFromConfig(pathToConfigFile);
+            }
 
             if (_settingsByConfigurationPath.ContainsKey(settingsFolder))
                 return _settingsByConfigurationPath[settingsFolder];
@@ -57,13 +65,15 @@ namespace Paralect.Config.Settings
             var settings = reader.Read();
 
             _settingsByConfigurationPath[settingsFolder] = settings;
-            return settings;            
+            return settings;
         }
 
         /// <summary>
-        /// By given directory find path to Settings Folder
+        /// By given directory find path to ConfigFile
         /// </summary>
-        private String GetSettingsFolderPath(String directoryPath)
+        /// <param name="directoryPath">Folder from which start search, it will go deeply and deeply until not find first .paralect.config or .core.config</param>
+        /// <returns>Path to ConfigFile</returns>
+        private String FindPathToConfigFile(string directoryPath)
         {
             DirectoryInfo current = new DirectoryInfo(directoryPath);
             DirectoryInfo root = current.Root;
@@ -75,11 +85,11 @@ namespace Paralect.Config.Settings
 
                 // First read from .paralect.config
                 if (File.Exists(coreConfigurationFilePath))
-                    return ReadSettingsFolderFromConfig(coreConfigurationFilePath);
+                    return coreConfigurationFilePath;
 
                 // Then try to find .core.config legacy configuration file
                 if (File.Exists(legacyCoreConfigurationFilePath))
-                    return ReadSettingsFolderFromConfig(legacyCoreConfigurationFilePath);
+                    return legacyCoreConfigurationFilePath;
 
                 current = current.Parent;
             }
@@ -93,7 +103,7 @@ namespace Paralect.Config.Settings
         private String ReadSettingsFolderFromConfig(String filePath)
         {
             var settingsFolderPath = File.ReadAllText(filePath).Trim();
-
+            settingsFolderPath = PathHelper.ProcessPossiblyRelativePath(settingsFolderPath, filePath);
             if (!Directory.Exists(settingsFolderPath))
                 throw new SettingsFolderNotFound(String.Format("Settings folder was not found. File {0} points to settings folder that doesn't exist: {1}.", filePath, settingsFolderPath));
 

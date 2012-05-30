@@ -19,7 +19,7 @@ namespace Paralect.Config.Settings
         {
             var instance = Activator.CreateInstance(typeof(TObject));
             Map(typeof(TObject), instance);
-            return (TObject) instance;
+            return (TObject)instance;
         }
 
         /// <summary>
@@ -34,26 +34,26 @@ namespace Paralect.Config.Settings
         /// <summary>
         /// Map application settings to instance of specified type
         /// </summary>
-        public static Object Map(Type type)
+        public static Object Map(Type type, string prefix = null)
         {
             var instance = Activator.CreateInstance(type);
-            Map(type, instance);
+            Map(type, instance, prefix);
             return instance;
         }
 
         /// <summary>
         /// Map application settings to existing object instance
         /// </summary>
-        public static void Map(Object instance)
+        public static void Map(Object instance, string prefix = null)
         {
-            Map(instance.GetType(), instance);
+            Map(instance.GetType(), instance, prefix);
         }
 
         /// <summary>
         /// Map application settings to your custom type or to existing instance of object
         /// null i
         /// </summary>
-        private static void Map(Type type, Object instance)
+        private static void Map(Type type, Object instance, string prefix = null)
         {
             // Create object instance if not specified
             if (instance == null)
@@ -64,29 +64,35 @@ namespace Paralect.Config.Settings
 
             foreach (var propertyInfo in propertyInfos)
             {
-                Object[] attributes = propertyInfo.GetCustomAttributes(typeof(SettingsPropertyAttribute), true);
+                Object[] propertyAttributes = propertyInfo.GetCustomAttributes(typeof(SettingsPropertyAttribute), true);
 
-                if (attributes.Length < 1)
+                if (propertyAttributes.Length == 0)
                     continue;
 
-                var propertyAttribute = attributes[0] as SettingsPropertyAttribute;
+                Object[] prefixAttributes = propertyInfo.GetCustomAttributes(typeof(SettingsPrefixAttribute), true);
+                if (prefixAttributes.Length == 1)
+                {
+                    prefix = ((SettingsPrefixAttribute)prefixAttributes[0]).Prefix;
+                }
 
-                ApplySettingsProperty(instance, propertyInfo, propertyAttribute);
+                ApplySettingsProperty(instance, propertyInfo, (SettingsPropertyAttribute)propertyAttributes[0], prefix);
             }
+
         }
 
-        private static void ApplySettingsProperty(Object instance, PropertyInfo propertyInfo, SettingsPropertyAttribute attribute)
+        private static void ApplySettingsProperty(Object instance, PropertyInfo propertyInfo, SettingsPropertyAttribute attribute, string prefix = null)
         {
             // If key was not specified we assuming that this is inner object
             if (!attribute.IsKeySpecified)
             {
-                var innerObj = SettingsMapper.Map(propertyInfo.PropertyType);
+                var innerObj = Map(propertyInfo.PropertyType, prefix);
                 propertyInfo.SetValue(instance, innerObj, null);
                 return;
             }
 
             // Reading settings from <appSettings />
-            var value = System.Configuration.ConfigurationManager.AppSettings[attribute.Key];
+            var key = String.IsNullOrEmpty(prefix) ? attribute.Key : String.Format("{0}.{1}", prefix, attribute.Key);
+            var value = System.Configuration.ConfigurationManager.AppSettings[key];
 
             Object convertedValue = null;
 

@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PathHelper.cs" />
+    <Compile Include="SettingsPrefixAttribute.cs" />
     <Compile Include="Exceptions\SettingsFolderNotFound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsPropertyAttribute.cs" />

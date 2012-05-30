@@ -61,7 +61,7 @@ namespace Paralect.Config.Settings.Test.Tests
             var obj2 = new MySettings();
             SettingsMapper.Map(obj2);
 
-            var obj3 = (MySettings) SettingsMapper.Map(typeof(MySettings));
+            var obj3 = (MySettings)SettingsMapper.Map(typeof(MySettings), null);
 
             var obj4 = new MySettings();
             SettingsMapper.Map(obj4);
