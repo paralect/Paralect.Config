@@ -11,7 +11,7 @@ Paralect.Config
 <table>
   <tr>
     <td> 
-![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
+      <img src="https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png" alt="example">
     </td>
     <td>
     Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
