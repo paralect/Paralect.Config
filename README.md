@@ -20,7 +20,7 @@ Settings Folder has only one configuration file named App.config. Content of thi
 </p>
 
 
-<!-- language: lang-xml -->
+``` xml
   <?xml version="1.0" encoding="utf-8"?>
   <configuration>
     <appSettings>
@@ -32,7 +32,7 @@ Settings Folder has only one configuration file named App.config. Content of thi
       <add key="Ajeva.Application.LocalFileContainerId" value="4" />
     </appSettings>
    </configuration> 
-
+```
 <p>
 Because there is no new format of storing application settings, existing project's settings can be simply converted to Settings Folder.
 You should organize your Settings Folder by your project needs, but usually you need dedicated profiles for all team members and for all deployment configurations (Stage, Production etc.).
