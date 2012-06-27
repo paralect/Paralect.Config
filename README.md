@@ -207,6 +207,30 @@ You can run it without any parameters. In this case you need to configure locati
 
 Command line arguments: 
  
- `/context:path` - Transform all configs in this path. By default this is a system current folder.
- `/settings:path` - Do not use .paralect.config files to determine Settings Folder location. Use direct path to Settings Folder for all transformations.
- `/silent` - Do not block UI (useful for running this component in background)
+ <table>
+  <tr>
+    <td>    
+      `/context:path`   
+    </td>
+     <td>    
+       Transform all configs in this path. By default this is a system current folder.
+    </td>
+    </tr>
+      <tr>      
+    <td>    
+      `/settings:path`
+    </td>
+     <td>    
+      Do not use .paralect.config files to determine Settings Folder location. Use direct path to Settings Folder for all transformations.
+    </td>
+    </tr>
+          <tr>
+    <td>    
+       `/silent`
+    </td>
+     <td>    
+   Do not block UI (useful for running this component in background)
+    </td>
+    </tr>
+ </table>
+  
