@@ -1,23 +1,26 @@
 
 
-![Alt text]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process%20Icon.jpg" "Optional title") <b>Paralect.Config</b> component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
+
+Paralect.Config
 ====================
+<p>
+![Alt "icon"]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process%20Icon.jpg")  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
+</p>
 
  Settings Folders
 ---------------------
-<p>
-  ![Alt text]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png" "Settings Folders")
+![Alt "example"]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png" "Settings Folders")
 
-</p>
- <p>
-Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
+<p>
+  Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your 
+  configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
 </p>
 <p>
 Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET `<appSettings />` section. Here is a simple App.config file:
 </p>
-<code>
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
+
+`<?xml version="1.0" encoding="utf-8" ?>
+ <configuration>
   <appSettings>
     <add key="Acropolis.RackSpaceUserName" value="Seventhman" />
     <add key="Acropolis.RackSpaceKey" value="b84ce1136903f53bcaded6d06c86dcb2" />
@@ -26,15 +29,15 @@ Settings Folder has only one configuration file named App.config. Content of thi
     <add key="Ajeva.Application.ContentUri" value="http://localhost:8020/content/static" />
     <add key="Ajeva.Application.LocalFileContainerId" value="4" />
   </appSettings>
-</configuration>
-</code>
+ </configuration>`
+
 <p>
 Because there is no new format of storing application settings, existing project's settings can be simply converted to Settings Folder.
 You should organize your Settings Folder by your project needs, but usually you need dedicated profiles for all team members and for all deployment configurations (Stage, Production etc.).
 <p>
 <p>
 Once you created Settings Folder you can reference to concrete settings folder by specifying path to this folder, i.e.:
-C:\Project\Settings\Profiles\DmitrySchetnikovich (see "Configuring of Settings Folder" below)
+`C:\Project\Settings\Profiles\DmitrySchetnikovich` (see "Configuring of Settings Folder" below)
 Settings Folders are well suited to be a part of your project source files and can be easily placed under your source control system (because this is an ordinary file-system based resource, and not registry-based or server metadata-based). 
 </p>
  Config Files
@@ -53,8 +56,8 @@ Example
 ---------------------
 
 This is how your config template can look:
-<code>
-<?xml version="1.0" encoding="utf-8"?>
+
+`<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:c="http://core.com/config"> 
@@ -91,14 +94,16 @@ This is how your config template can look:
 
   </xsl:template> 
 
-</xsl:stylesheet>
-</code>
+</xsl:stylesheet>`
+
 
 All application settings in one line
+---------------------
+
 To print all application settings in the common `<appSettings />` format, use this line:
 
-<code>
-<configuration>
+
+`<configuration>
   <appSettings>
     <add key="AdditionaProperty1" value="Value1" />
     <add key="AdditionaProperty2" value="Value2" />
@@ -107,15 +112,18 @@ To print all application settings in the common `<appSettings />` format, use th
   </appSettings>
   ...
 </configuration>
-</code>
+</code>`
 <p>
-Configuring of Settings Folder via Setting Path file (.paralect.config or .core.config)
+
+Configuring of Settings Folder via Setting Path file (`.paralect.config` or `.core.config`)
+---------------------
+
 To run Paralect.Config.exe without any arguments you need to configure location to your Settings Folder for particular App.config.xslt or Web.config.xslt in Path File.
 </p>
-> 1. One path file for the all solution projects
+ 1. One path file for the all solution projects
 Without any arguments Paralect.Config will start search for Path File at the current directory (where *.config.xslt located) if Path File will not found it will look into the parent folder, therefore if you want to have one Path File for the all projects and you have project structure like below, you can just put Path File under source folder and it will be used to transform all solution configs :
-<code>
-D:\\MyProject\
+
+`D:\\MyProject\
      settings
       App.config
          Stage
@@ -128,18 +136,18 @@ D:\\MyProject\
              web.config.xslt
          Project2Folder
              app.config.xslt
-      .paralect.config
-</code>
-> 2. Separate path file for particular project
+      .paralect.config`
+
+ 2. Separate path file for particular project
 To use separate settings for particular project you can just put Path File near *.config.xslt and it will be used to locate settings.
 
-> 3.Content of the path file
- Path file can contains FULL or RELATIVE path to the settings folder.
+ 3.Content of the path file
+Path file can contains FULL or RELATIVE path to the settings folder.
 Examples of path file content(based on above project structure):
-  1. D:\\MyProject\settings\Stage
-  2. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
+  a. D:\\MyProject\settings\Stage
+  b. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
 
-> 4. Source control and Path File:
+ 4. Source control and Path File:
 The file path should not be under your source control system, because in most situations developers has different paths and you will continuously merge this file.
 
 
@@ -149,8 +157,8 @@ Quick Start
 In your existing project add corresponding configuration template file just near your normal configuration file (App.config or Web.config). Name this template by adding .xslt extension to the file (App.config.xslt or Web.config.xslt).
 Start with the following template:
 
-<code>
-<?xml version="1.0" encoding="utf-8"?>
+
+`<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" exclude-result-prefixes="c" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:c="http://paralect.com/config">
@@ -159,8 +167,8 @@ Start with the following template:
       <!-- Place your configuration here -->
   </xsl:template>
 
-</xsl:stylesheet>
-</code>
+</xsl:stylesheet>`
+
 
 Now just copy full content of App.config to this template. By doing this you will receive the same App.config file after transformation.
 Integration with build process (via MSBuild)
