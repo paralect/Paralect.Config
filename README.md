@@ -4,7 +4,7 @@
 Paralect.Config
 ====================
 <p>
-![icon](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process%20Icon.jpg)  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
+![icon](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process Icon.jpg)  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
 </p>
 
  Settings Folders
@@ -19,18 +19,21 @@ Paralect.Config
 Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET `<appSettings />` section. Here is a simple App.config file:
 </p>
 
-`
-<configuration>
-  <appSettings>
-    <add key="Acropolis.RackSpaceUserName" value="Seventhman" />
-    <add key="Acropolis.RackSpaceKey" value="b84ce1136903f53bcaded6d06c86dcb2" />
-    <add key="Acropolis.CacheServer" value="localhost" />
-    <add key="Ajeva.Application.RootUri" value="http://localhost:8020" />
-    <add key="Ajeva.Application.ContentUri" value="http://localhost:8020/content/static" />
-    <add key="Ajeva.Application.LocalFileContainerId" value="4" />
-  </appSettings>
- </configuration>
- `
+
+<!-- language: lang-xml -->
+<code>
+  <?xml version="1.0" encoding="utf-8"?>
+  <configuration>
+    <appSettings>
+      <add key="Acropolis.RackSpaceUserName" value="Seventhman" />
+      <add key="Acropolis.RackSpaceKey" value="b84ce1136903f53bcaded6d06c86dcb2" />
+      <add key="Acropolis.CacheServer" value="localhost" />
+      <add key="Ajeva.Application.RootUri" value="http://localhost:8020" />
+      <add key="Ajeva.Application.ContentUri" value="http://localhost:8020/content/static" />
+      <add key="Ajeva.Application.LocalFileContainerId" value="4" />
+    </appSettings>
+   </configuration>
+ </code>
 
 <p>
 Because there is no new format of storing application settings, existing project's settings can be simply converted to Settings Folder.
