@@ -5,6 +5,10 @@
 
  Settings Folders
 ---------------------
+<p>
+  ![Alt text]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png" "Settings Folders")
+
+</p>
  <p>
 Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
 </p>
