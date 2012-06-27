@@ -161,8 +161,8 @@ To use separate settings for particular project you can just put Path File near 
 Path file can contains FULL or RELATIVE path to the settings folder.
 Examples of path file content(based on above project structure):
 
-  a. `D:\\MyProject\settings\Stage` 
-  b. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
+  * `D:\\MyProject\settings\Stage` 
+  * ../settings (relative path should not starts from slash, because it will be treat as absolute path)
 
  4.Source control and Path File:
 The file path should not be under your source control system, because in most situations developers has different paths and you will continuously merge this file.
@@ -194,9 +194,9 @@ Integration with build process (via MSBuild)
 If your project should produce configuration file - then add the following lines to the end of *.csproj file:
   
    ``` xml
-   <Target Name="ParalectConfig" BeforeTargets="PreBuildEvent">
-     <Exec Command="&quot;$(MSBuildProjectDirectory)\..\Paralect.Config.exe&quot; /silent" />
-   </Target>
+<Target Name="ParalectConfig" BeforeTargets="PreBuildEvent">
+  <Exec Command="&quot;$(MSBuildProjectDirectory)\..\Paralect.Config.exe&quot; /silent" />
+</Target>
    ```
 With each build your configuration file will be produced by Paralect.Config.exe. You should place Paralect.Config.exe file in the folder were your *.sln file exists (or choose any location you like and reflect this in MSBuild Exec task definition). You even can register Paralect.Config.exe in your PATH environment variable - but in this case your project will depend on system configuration.
 
@@ -205,9 +205,16 @@ Usage
 ---------------------
 You can run it without any parameters. In this case you need to configure location of Settings Folder in the `.paralect.config` files. 
 
-Command line arguments: 
- 
+Command line arguments:  
  <table>
+   <tr>
+    <td>    
+      Argument
+    </td>
+     <td>    
+       Description
+    </td>
+    </tr>
   <tr>
     <td>    
       `/context:path`   
