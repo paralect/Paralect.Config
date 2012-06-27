@@ -11,7 +11,7 @@ Paralect.Config
 <table>
   <tr>
     <td> 
-      ![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
+![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
     </td>
     <td>
     Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
@@ -132,8 +132,8 @@ Configuring of Settings Folder via Setting Path file (`.paralect.config` or `.co
 To run Paralect.Config.exe without any arguments you need to configure location to your Settings Folder for particular App.config.xslt or Web.config.xslt in Path File.
 </p>
  1.One path file for the all solution projects
- </ br>
-Without any arguments Paralect.Config will start search for Path File at the current directory (where *.config.xslt located) if Path File will not found it will look into the parent folder, therefore if you want to have one Path File for the all projects and you have project structure like below, you can just put Path File under source folder and it will be used to transform all solution configs :
+ 
+ Without any arguments Paralect.Config will start search for Path File at the current directory (where *.config.xslt located) if Path File will not found it will look into the parent folder, therefore if you want to have one Path File for the all projects and you have project structure like below, you can just put Path File under source folder and it will be used to transform all solution configs :
 
 ``` text 
 D:\\MyProject\
@@ -153,18 +153,17 @@ D:\\MyProject\
 ```
 
  2.Separate path file for particular project
- </ br>
+
 To use separate settings for particular project you can just put Path File near *.config.xslt and it will be used to locate settings.
 
  3.Content of the path file
- </ br>
+
 Path file can contains FULL or RELATIVE path to the settings folder.
 Examples of path file content(based on above project structure):
-</ br>
-  a. `D:\\MyProject\settings\Stage`
-  </ br>
+
+  a. `D:\\MyProject\settings\Stage` 
   b. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
-</ br>
+
  4.Source control and Path File:
 The file path should not be under your source control system, because in most situations developers has different paths and you will continuously merge this file.
 
