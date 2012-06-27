@@ -20,7 +20,7 @@ Paralect.Config
 </table>
 
 <p>
-Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET <appSettings /> section. Here is a simple App.config file:
+Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET `<appSettings>` section. Here is a simple App.config file:
 </p>
 
 
