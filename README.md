@@ -1,10 +1,8 @@
-
-
-
 Paralect.Config
 ====================
+<hr />
 <p>
-![icon](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process Icon.jpg)  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
+  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
 </p>
 
  Settings Folders
@@ -12,7 +10,9 @@ Paralect.Config
 
 <table>
   <tr>
-    <td>![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)</td>
+    <td> 
+      ![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
+    </td>
     <td>
     Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
     </td>
@@ -46,6 +46,7 @@ Once you created Settings Folder you can reference to concrete settings folder b
 `C:\Project\Settings\Profiles\DmitrySchetnikovich` (see "Configuring of Settings Folder" below)
 Settings Folders are well suited to be a part of your project source files and can be easily placed under your source control system (because this is an ordinary file-system based resource, and not registry-based or server metadata-based). 
 </p>
+<hr />
  Config Files
 ---------------------
 <p>
@@ -63,7 +64,7 @@ Example
 
 This is how your config template can look:
 
-``` yaml
+``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -103,6 +104,7 @@ This is how your config template can look:
 
 </xsl:stylesheet>
 ```
+<hr />
 
 All application settings in one line
 ---------------------
@@ -110,7 +112,7 @@ All application settings in one line
 To print all application settings in the common `<appSettings />` format, use this line:
 
 
-``` yaml
+``` xml
 <configuration>
   <appSettings>
     <add key="AdditionaProperty1" value="Value1" />
@@ -129,7 +131,8 @@ Configuring of Settings Folder via Setting Path file (`.paralect.config` or `.co
 
 To run Paralect.Config.exe without any arguments you need to configure location to your Settings Folder for particular App.config.xslt or Web.config.xslt in Path File.
 </p>
- 1. One path file for the all solution projects
+ 1.One path file for the all solution projects
+ </ br>
 Without any arguments Paralect.Config will start search for Path File at the current directory (where *.config.xslt located) if Path File will not found it will look into the parent folder, therefore if you want to have one Path File for the all projects and you have project structure like below, you can just put Path File under source folder and it will be used to transform all solution configs :
 
 ``` text 
@@ -149,16 +152,20 @@ D:\\MyProject\
       .paralect.config
 ```
 
- 2. Separate path file for particular project
+ 2.Separate path file for particular project
+ </ br>
 To use separate settings for particular project you can just put Path File near *.config.xslt and it will be used to locate settings.
 
  3.Content of the path file
+ </ br>
 Path file can contains FULL or RELATIVE path to the settings folder.
 Examples of path file content(based on above project structure):
+</ br>
   a. `D:\\MyProject\settings\Stage`
+  </ br>
   b. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
-
- 4. Source control and Path File:
+</ br>
+ 4.Source control and Path File:
 The file path should not be under your source control system, because in most situations developers has different paths and you will continuously merge this file.
 
 
@@ -169,7 +176,7 @@ In your existing project add corresponding configuration template file just near
 Start with the following template:
 
 
-``` yaml
+``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" exclude-result-prefixes="c" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -200,10 +207,7 @@ Usage
 You can run it without any parameters. In this case you need to configure location of Settings Folder in the `.paralect.config` files. 
 
 Command line arguments: 
-
  
  `/context:path` - Transform all configs in this path. By default this is a system current folder.
-
  `/settings:path` - Do not use .paralect.config files to determine Settings Folder location. Use direct path to Settings Folder for all transformations.
-
  `/silent` - Do not block UI (useful for running this component in background)
