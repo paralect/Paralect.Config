@@ -4,12 +4,12 @@
 Paralect.Config
 ====================
 <p>
-![Alt "icon"]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process%20Icon.jpg")  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
+![icon](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Process%20Icon.jpg)  Paralect.Config component solves two common problems - management of key-value settings and management of .NET config files (App.config and Web.config).
 </p>
 
  Settings Folders
 ---------------------
-![Alt "example"]("https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png" "Settings Folders")
+![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
 
 <p>
   Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your 
@@ -19,8 +19,8 @@ Paralect.Config
 Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET `<appSettings />` section. Here is a simple App.config file:
 </p>
 
-`<?xml version="1.0" encoding="utf-8" ?>
- <configuration>
+`
+<configuration>
   <appSettings>
     <add key="Acropolis.RackSpaceUserName" value="Seventhman" />
     <add key="Acropolis.RackSpaceKey" value="b84ce1136903f53bcaded6d06c86dcb2" />
@@ -29,7 +29,8 @@ Settings Folder has only one configuration file named App.config. Content of thi
     <add key="Ajeva.Application.ContentUri" value="http://localhost:8020/content/static" />
     <add key="Ajeva.Application.LocalFileContainerId" value="4" />
   </appSettings>
- </configuration>`
+ </configuration>
+ `
 
 <p>
 Because there is no new format of storing application settings, existing project's settings can be simply converted to Settings Folder.
