@@ -9,12 +9,16 @@ Paralect.Config
 
  Settings Folders
 ---------------------
-![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)
 
-<p>
-  Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your 
-  configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
-</p>
+<table>
+  <tr>
+    <td>![example](https://sites.google.com/a/paralect.com/team/paralect-library/paralect-config/Settings.png)</td>
+    <td>
+    Settings Folder is a simple concept of hierarchical configuration system well understood by many ASP.NET developers. The more deeper your configuration file is located the more precedence your configuration file has comparing to outer configuration files. This is a simple way to overwrite outer configuration.
+    </td>
+  </tr>
+</table>
+
 <p>
 Settings Folder has only one configuration file named App.config. Content of this file is a plain .NET `<appSettings />` section. Here is a simple App.config file:
 </p>
@@ -59,7 +63,8 @@ Example
 
 This is how your config template can look:
 
-`<?xml version="1.0" encoding="utf-8"?>
+``` yaml
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:c="http://core.com/config"> 
@@ -96,8 +101,8 @@ This is how your config template can look:
 
   </xsl:template> 
 
-</xsl:stylesheet>`
-
+</xsl:stylesheet>
+```
 
 All application settings in one line
 ---------------------
@@ -105,7 +110,8 @@ All application settings in one line
 To print all application settings in the common `<appSettings />` format, use this line:
 
 
-`<configuration>
+``` yaml
+<configuration>
   <appSettings>
     <add key="AdditionaProperty1" value="Value1" />
     <add key="AdditionaProperty2" value="Value2" />
@@ -114,7 +120,8 @@ To print all application settings in the common `<appSettings />` format, use th
   </appSettings>
   ...
 </configuration>
-</code>`
+</code>
+```
 <p>
 
 Configuring of Settings Folder via Setting Path file (`.paralect.config` or `.core.config`)
@@ -125,7 +132,8 @@ To run Paralect.Config.exe without any arguments you need to configure location 
  1. One path file for the all solution projects
 Without any arguments Paralect.Config will start search for Path File at the current directory (where *.config.xslt located) if Path File will not found it will look into the parent folder, therefore if you want to have one Path File for the all projects and you have project structure like below, you can just put Path File under source folder and it will be used to transform all solution configs :
 
-`D:\\MyProject\
+``` text 
+D:\\MyProject\
      settings
       App.config
          Stage
@@ -138,7 +146,8 @@ Without any arguments Paralect.Config will start search for Path File at the cur
              web.config.xslt
          Project2Folder
              app.config.xslt
-      .paralect.config`
+      .paralect.config
+```
 
  2. Separate path file for particular project
 To use separate settings for particular project you can just put Path File near *.config.xslt and it will be used to locate settings.
@@ -146,7 +155,7 @@ To use separate settings for particular project you can just put Path File near 
  3.Content of the path file
 Path file can contains FULL or RELATIVE path to the settings folder.
 Examples of path file content(based on above project structure):
-  a. D:\\MyProject\settings\Stage
+  a. `D:\\MyProject\settings\Stage`
   b. ../settings (relative path should not starts from slash, because it will be treat as absolute path)
 
  4. Source control and Path File:
@@ -160,7 +169,8 @@ In your existing project add corresponding configuration template file just near
 Start with the following template:
 
 
-`<?xml version="1.0" encoding="utf-8"?>
+``` yaml
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" exclude-result-prefixes="c" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:c="http://paralect.com/config">
@@ -169,16 +179,19 @@ Start with the following template:
       <!-- Place your configuration here -->
   </xsl:template>
 
-</xsl:stylesheet>`
+</xsl:stylesheet>
+```
 
 
 Now just copy full content of App.config to this template. By doing this you will receive the same App.config file after transformation.
 Integration with build process (via MSBuild)
 If your project should produce configuration file - then add the following lines to the end of *.csproj file:
   
-   `<Target Name="ParalectConfig" BeforeTargets="PreBuildEvent">
+   ``` xml
+   <Target Name="ParalectConfig" BeforeTargets="PreBuildEvent">
      <Exec Command="&quot;$(MSBuildProjectDirectory)\..\Paralect.Config.exe&quot; /silent" />
-   </Target>`
+   </Target>
+   ```
 With each build your configuration file will be produced by Paralect.Config.exe. You should place Paralect.Config.exe file in the folder were your *.sln file exists (or choose any location you like and reflect this in MSBuild Exec task definition). You even can register Paralect.Config.exe in your PATH environment variable - but in this case your project will depend on system configuration.
 
 
